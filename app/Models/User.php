@@ -32,7 +32,7 @@ class User extends Authenticatable
 
 
     // Relación de uno a muchos
-    // Un usuario le pertenece un rol
+    // Un usuario le pertenece un rola
     public function role()
     {
         return $this->belongsTo(Role::class);
