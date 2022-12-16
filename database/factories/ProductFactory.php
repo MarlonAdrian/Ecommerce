@@ -15,7 +15,7 @@ class ProductFactory extends Factory
         return [           
             'code_product' => $this->faker->iban(),
             'name_product' => $this->faker->userAgent(),//text(50)
-            'price' => $this->faker->numberBetween($min = 1.00, $max = 500.00),
+            'price' => $this->faker->randomFloat(2, 50, 100),
             'description' => $this->faker->sentence(),
             'stock' => $this->faker->numberBetween($min = 4, $max = 8)
         ];
