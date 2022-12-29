@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'name',
+    ];
     // Relación de uno a muchos
     // Un rol tiene varios usuarios
     public function users()

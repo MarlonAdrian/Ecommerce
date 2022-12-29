@@ -26,6 +26,6 @@ class ImageSeeder extends Seeder
             $product->image()->create([
                 'path' => "https://picsum.photos/id/$product->id/200/300"
             ]);
-        });
-    }
+        });      
+}
 }

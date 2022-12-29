@@ -16,11 +16,13 @@ return new class extends Migration
             //Product's name
             $table->string('name_product',200);
             //Product's Price
-            $table->decimal('price', 9, 3);
+            $table->decimal('price', 8, 2);
             //Product's Description
             $table->string('description')->nullable();
             //Product's Stock
             $table->string('stock');
+            //Product's State
+            $table->boolean('state')->default(true);
 
 
            //Un producto puede estar en varios negocios y 

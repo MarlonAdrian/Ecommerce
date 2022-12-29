@@ -2,21 +2,36 @@
 
 namespace App\Models;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function getJWTCustomClaims(){
+        return [];
+    }
+
+    public function getJWTIdentifier(){
+        return $this->getKey();
+    }
+
 
     protected $fillable = [
-        'name',
+        'role_id',
+        'first_name',
+        'second_name',
+        'personal_phone',
         'email',
         'password',
+        'address',
+        'birthdate',
     ];
 
 
@@ -51,4 +66,24 @@ class User extends Authenticatable
     {
         return $this->morphOne(Image::class,'imageable');
     }       
+
+    public function commerces()
+    {
+        return $this->hasOne(Commerce::class);
+    }   
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }    
+ 
+    public function getFullName(): string
+    {
+        return "$this->first_name $this->second_name";
+    }
+ 
+    public function getBirthdateAttribute($value): ?string
+    {
+        return isset($value) ? Carbon::parse($value)->format('d/m/Y') : null;
+    }    
 }

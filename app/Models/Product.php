@@ -8,7 +8,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 
+        //'user_id', 
         'code_product',
         'name_product',
         'price',
@@ -37,4 +37,9 @@ class Product extends Model
     {
         return $this->morphOne(Image::class,'imageable');
     }
+
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }        
 }

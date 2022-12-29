@@ -21,4 +21,11 @@ class Image extends Model
         return $this->morphTo();
     }
 
+ 
+    public function getUrl(): string
+    {
+        return Str::startsWith($this->path, 'https://')
+            ? $this->path
+            : Storage::url($this->path);
+    }
 }

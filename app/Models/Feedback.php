@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
-{
+{    
     use HasFactory;
+    protected $fillable = [
+        'score',
+        'comment',
+        'product_id',
+        'user_id'
+
+    ];
 
     // Relación de uno a muchos
     //Un feedback le pertenece a un usuario
@@ -21,5 +28,5 @@ class Feedback extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
-    }      
+    }          
 }
