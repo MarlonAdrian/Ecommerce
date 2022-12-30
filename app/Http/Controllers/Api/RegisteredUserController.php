@@ -15,10 +15,21 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Validation\Rules;
 
-
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class RegisteredUserController extends Controller
 {
+
+    protected $listen = [
+        Registered::class => [
+            SendEmailVerificationNotification::class,
+        ],
+    ];   
+
+
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -64,7 +75,8 @@ class RegisteredUserController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
-    
+        event(new Registered($user));
+ 
         return response()->json(compact('user','token'),201);
     }
 

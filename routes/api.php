@@ -32,6 +32,9 @@ Route::get('/indexUsers', [AdminController::class, 'indexUsers']);
 Route::get('/indexUsers/{id}', [AdminController::class, 'showUsers']);
 Route::delete('/indexUsers/{id}', [AdminController::class, 'destroyUsers']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum','verified')->get('/user', function (Request $request) {
+    // return $request->user();
+    // Route::get('/products', [ProductOwnerController::class, 'products']);
 });
+
+

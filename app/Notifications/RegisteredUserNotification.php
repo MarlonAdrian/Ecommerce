@@ -11,22 +11,18 @@ class RegisteredUserNotification extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private string $username;
+    private string $user_role;
+    private string $password;
+
+    public function __construct(string $user, string $password)
     {
-        //
+        $this->username = $user;
+        
+        $this->password = $password;
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
+
     public function via($notifiable)
     {
         return ['mail'];
@@ -40,10 +36,15 @@ class RegisteredUserNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $login_url = url('/login');
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject('Eres un cliente nuevo! Bienvenido a nuestro Ecommerce de Equipos Computacionales')
+            ->line('Que tal' . " $this->username"."?")
+            ->line('Has sido registrado en el sistema con el rol de cliente,')
+            ->line('La contraseña que ha sido generada para que puedas ingresar el sistema es:' . " $this->password")
+            ->line('Puedes iniciar sesión dando clic')
+            ->action('Login', $login_url)
+            ->line('Recuerda: cambia la contraseña cuando verifiques el email y acceso al sistema.');
     }
 
     /**
