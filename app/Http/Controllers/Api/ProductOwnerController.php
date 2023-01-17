@@ -14,6 +14,7 @@ class ProductOwnerController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+        $this->middleware('can:manage-products');
     }
 
     public function products(){
@@ -47,7 +48,6 @@ class ProductOwnerController extends Controller
             ['msg' => 'product_created']);   
     }
     
-
     public function edit(Request $request, $id){
         //input
         $request->validate([

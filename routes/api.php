@@ -30,20 +30,19 @@ Route::get('/feedbacks', [FeedbackController::class, 'feedbacks']);
 
 
 /*-----------------------ADMIN-----------------------*/
+/*Users*/
 Route::get('/indexUsers', [AdminController::class, 'indexUsers']);
 Route::get('/showUser/{id}', [AdminController::class, 'showUser']);
 Route::delete('/destroyUser/{id}', [AdminController::class, 'destroyUser']);
-/*Commerce */
+/*Commerces*/
 Route::get('/indexCommerces', [AdminController::class, 'indexCommerces']);
 Route::get('/showCommerce/{id}', [AdminController::class, 'showCommerce']);
 Route::delete('/destroyCommerce/{id}', [AdminController::class, 'destroyCommerce']);
 /*Product */
 Route::get('/indexProducts', [AdminController::class, 'indexProducts']);
 Route::get('/showaProduct/{id}', [AdminController::class, 'showaProduct']);
-Route::delete('/destroyProduct/{id}', [AdminController::class, 'destroyProduct']);
 /*Feedback */
 Route::get('/showFeedback/{id}', [AdminController::class, 'showFeedback']);
-Route::delete('/destroyFeedback/{id}', [AdminController::class, 'destroyFeedback']);
 
 /*-------------------PRODUCT OWNER-------------------*/
 Route::get('/products', [ProductOwnerController::class, 'products']);
@@ -58,7 +57,7 @@ Route::put('/editFeedback/{id}', [ClientController::class, 'editfeedback']); //e
 Route::delete('/destroyFeedback/{id}', [ClientController::class, 'destroyfeedback']);
 Route::post('/orderProduct', [ClientController::class, 'orderProduct']);
 Route::put('/editOrderProduct/{id}', [ClientController::class, 'editOrderProduct']);
-
+Route::get('/showfeedbacks', [ClientController::class, 'showfeedbacks']);
 Route::get('/showMyProduct/{id}', [ClientController::class, 'showMyProduct']);
 
 Route::middleware('auth:sanctum','verified')->get('/user', function (Request $request) {

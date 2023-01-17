@@ -21,6 +21,8 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api')->except('indexProducts');
+        $this->middleware('can:manage-personal');
+        $this->middleware('can:manage-commerces');
     }
 
 /*----MANAGE USER---*/    
@@ -69,20 +71,9 @@ class AdminController extends Controller
         return new ProductResource(Product::findOrFail($id));
     }    
 
-    public function destroyProduct($id){
-        Product::destroy($id);
-        return with(
-            ['msg' => 'product_removed']); 
-    } 
 /*----MANAGE FEEDBACK---*/  
 
     public function showFeedback($id){
         return new FeedbackResource(Feedback::findOrFail($id));
-    }    
-
-    public function destroyFeedback($id){
-        Feedback::destroy($id);
-        return with(
-            ['msg' => 'feedback_removed']); 
-    }   
+    }      
 }

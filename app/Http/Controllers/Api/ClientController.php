@@ -18,14 +18,16 @@ class ClientController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('getAll','showproducts');
+        $this->middleware('auth:api')->except('showproducts','showfeedbacks');
+        $this->middleware('can:manage-orders')->except('showproducts','showfeedbacks');
     }
 
-    /*-----SHOW ALL PRODUCT-----*/    
+    /*-----SHOW ALL PRODUCT-----*/
     public function showproducts(){
         $products = Product::all();
         return ProductResource::collection($products);
     }
+    
     /*-----OBTAIN ALL MY PRODUCTS-----*/ 
     /*-----OBTAIN PRODUCT-----*/
     public function orderProduct(Request $request){
