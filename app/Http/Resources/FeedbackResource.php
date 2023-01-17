@@ -11,7 +11,7 @@ class FeedbackResource extends JsonResource
     {
 
         return[
-            'picture' => $this->product->image->path,                       
+            'picture' => $this->product->path_image,                       
             'product' => $this->product->name_product,
             'score'=> $this->score,
             'comment'=>$this->comment,

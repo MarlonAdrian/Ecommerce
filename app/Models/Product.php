@@ -8,17 +8,18 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        //'user_id', 
+        'user_id', 
         'code_product',
         'name_product',
         'price',
         'description',
         'stock',
-        'commerce_id'
+        'path_image'
     ];
 
     // Relación de uno a muchos
     //Un producto puede estar en varios negocios
+    /**modificado por la eliminacion de la columna commerce de la tabla productos */
     public function commerce()
     {
         return $this->belongsTo(Commerce::class);
@@ -31,15 +32,14 @@ class Product extends Model
         return $this->hasMany(Feedback::class);
     }
 
-    // Relación polimórfica uno a uno
-    // Un producto puede tener una imagen    
-    public function image()
-    {
-        return $this->morphOne(Image::class,'imageable');
-    }
-
+    //Relación de uno a muchos
     public function user()
     {
-        return $this->belongsToMany(User::class);
-    }        
+        return $this->belongsTo(User::class);
+    }  
+
+    public function productorder()
+    {
+        return $this->belongsTo(ProductOrder::class);
+    }      
 }

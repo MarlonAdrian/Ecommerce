@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             CommerceSeeder::class,
             ProductSeeder::class,
             FeedbackSeeder::class,
-            ImageSeeder::class
+            ProductOrderSeeder::class,
+
         ]);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\RegisteredUserController;
 use App\Http\Controllers\Api\ProductOwnerController;
 use App\Http\Controllers\Api\FeedbackController;
+use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\Rules\Password;
 
 use Illuminate\Http\Request;
@@ -24,13 +25,41 @@ use App\Http\Middleware\JwtMiddleware;
 */
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [RegisteredUserController::class, 'register']);
-Route::get('/products', [ProductOwnerController::class, 'products']);
+Route::get('/showproducts', [ClientController::class, 'showproducts']);
 Route::get('/feedbacks', [FeedbackController::class, 'feedbacks']);
 
 
+/*-----------------------ADMIN-----------------------*/
 Route::get('/indexUsers', [AdminController::class, 'indexUsers']);
-Route::get('/indexUsers/{id}', [AdminController::class, 'showUsers']);
-Route::delete('/indexUsers/{id}', [AdminController::class, 'destroyUsers']);
+Route::get('/showUser/{id}', [AdminController::class, 'showUser']);
+Route::delete('/destroyUser/{id}', [AdminController::class, 'destroyUser']);
+/*Commerce */
+Route::get('/indexCommerces', [AdminController::class, 'indexCommerces']);
+Route::get('/showCommerce/{id}', [AdminController::class, 'showCommerce']);
+Route::delete('/destroyCommerce/{id}', [AdminController::class, 'destroyCommerce']);
+/*Product */
+Route::get('/indexProducts', [AdminController::class, 'indexProducts']);
+Route::get('/showaProduct/{id}', [AdminController::class, 'showaProduct']);
+Route::delete('/destroyProduct/{id}', [AdminController::class, 'destroyProduct']);
+/*Feedback */
+Route::get('/showFeedback/{id}', [AdminController::class, 'showFeedback']);
+Route::delete('/destroyFeedback/{id}', [AdminController::class, 'destroyFeedback']);
+
+/*-------------------PRODUCT OWNER-------------------*/
+Route::get('/products', [ProductOwnerController::class, 'products']);
+Route::post('/publishProduct', [ProductOwnerController::class, 'store']);
+Route::get('/showProduct/{id}', [ProductOwnerController::class, 'showProduct']);
+Route::delete('/destroyProduct/{id}', [ProductOwnerController::class, 'destroyProduct']);
+Route::put('/editProduct/{id}', [ProductOwnerController::class, 'edit']);
+
+/*-----------------------CLIENT-----------------------*/
+Route::post('/postFeedback', [ClientController::class, 'postfeedback']);
+Route::put('/editFeedback/{id}', [ClientController::class, 'editfeedback']); //el primer id estaba $feedback
+Route::delete('/destroyFeedback/{id}', [ClientController::class, 'destroyfeedback']);
+Route::post('/orderProduct', [ClientController::class, 'orderProduct']);
+Route::put('/editOrderProduct/{id}', [ClientController::class, 'editOrderProduct']);
+
+Route::get('/showMyProduct/{id}', [ClientController::class, 'showMyProduct']);
 
 Route::middleware('auth:sanctum','verified')->get('/user', function (Request $request) {
     // return $request->user();

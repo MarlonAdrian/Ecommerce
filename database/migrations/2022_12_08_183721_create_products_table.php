@@ -11,10 +11,12 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             //ID for BDD
             $table->id();
+            //Image for BDD
+            $table->string('path_image')->nullable();
             //Product's Code
             $table->string('code_product')->unique();
             //Product's name
-            $table->string('name_product',200);
+            $table->string('name_product',200)->unique();
             //Product's Price
             $table->decimal('price', 8, 2);
             //Product's Description
@@ -25,15 +27,14 @@ return new class extends Migration
             $table->boolean('state')->default(true);
 
 
-           //Un producto puede estar en varios negocios y 
-           //Un negocio puede tener muchos productos
-           $table->unsignedBigInteger('commerce_id');
-           $table->foreign('commerce_id')
+           //Un producto puede estar varios usuarios y 
+           //Un usuario puede tener muchos productos
+           $table->unsignedBigInteger('user_id');
+           $table->foreign('user_id')
                 ->references('id')
-                ->on('commerces')
+                ->on('users')
                 ->onDelete('cascade')
-                ->onUpdate('cascade');     
-
+                ->onUpdate('cascade');                     
             $table->timestamps();
         });
     }

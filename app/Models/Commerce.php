@@ -9,7 +9,8 @@ class Commerce extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name_commerce'
+        'name_commerce',
+        'user_id'
     ]; 
     // Relación de uno a muchos 
     //Un negocio puede tener muchos productos

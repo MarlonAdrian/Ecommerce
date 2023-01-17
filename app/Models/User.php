@@ -55,28 +55,32 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
     // Relación de uno a muchos
     // Un usuario puede realizar muchos feedback
-    public function feedbacks()
+    public function feedback()
     {
         return $this->hasMany(Feedback::class);
     }
-
-    // Relación polimórfica uno a uno
-    // Un usuario puede tener una imagen
+  
     public function image()
     {
-        return $this->morphOne(Image::class,'imageable');
-    }       
+        return $this->hasMany(Image::class);
+    }
 
+    // Relación polimórfica uno a uno 
     public function commerces()
     {
         return $this->hasOne(Commerce::class);
     }   
-
+ 
     public function products()
     {
         return $this->hasMany(Product::class);
-    }    
- 
+    }   
+
+    public function productorder()
+    {
+        return $this->hasMany(ProductOrder::class);
+    }  
+
     public function getFullName(): string
     {
         return "$this->first_name $this->second_name";
