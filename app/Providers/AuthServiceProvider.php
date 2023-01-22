@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 use App\Models\User;
-use App\Models\ProductOrder;
-
+use App\Policies\OwnerPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Auth\Access\Response;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,7 +21,9 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage-personal', function (User $user)
         {
-            return $user->role_id == '1';
+            return $user->role_id == '1'
+                        ? Response::allow()
+                        : Response::deny('Acción no permitida');
         });
 
         Gate::define('manage-commerces', function (User $user)
@@ -31,7 +33,9 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage-products', function (User $user)
         {
-            return $user->role_id == '2';
+            return $user->role_id == '2'
+                        ? Response::allow()
+                        : Response::deny('Acción no permitida');            
         });
 
         Gate::define('manage-orders', function (User $user)

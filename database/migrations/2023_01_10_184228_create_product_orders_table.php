@@ -11,8 +11,8 @@ return new class extends Migration
     {
         Schema::create('product_orders', function (Blueprint $table) {
             $table->id();
-
-            $table->boolean('received')->default(1);//1=received, 0=noreceived
+            $table->boolean('received')->default(TRUE);//1=received, 0=noreceived
+            $table->integer('amount')->default(1);//by default will be 1  
 
            //Un producto puede estar varios usuarios y 
            //Un usuario puede tener muchos productos
@@ -24,15 +24,16 @@ return new class extends Migration
                 ->onUpdate('cascade');    
 
 
-           $table->string('name_product');
-           $table->foreign('name_product')
-                ->references('name_product')
+           //Un producto puede estar varios pedidos y 
+           //Un pedido puede tener muchos productos
+           $table->unsignedBigInteger('product_id');
+           $table->foreign('product_id')
+                ->references('id')
                 ->on('products')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');    
 
-
-           $table->integer('amount')->default(1);//by default will be 1                     
+  
            $table->timestamps();
         });
     }

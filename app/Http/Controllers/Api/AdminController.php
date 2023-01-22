@@ -72,7 +72,6 @@ class AdminController extends Controller
     }    
 
 /*----MANAGE FEEDBACK---*/  
-
     public function showFeedback($id){
         return new FeedbackResource(Feedback::findOrFail($id));
     }      

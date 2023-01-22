@@ -47,7 +47,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 
 
     // Relación de uno a muchos
-    // Un usuario le pertenece un rola
+    // Un usuario le pertenece un rol
     public function role()
     {
         return $this->belongsTo(Role::class);

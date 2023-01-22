@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\Response;
 
 class ProductOwnerController extends Controller
 {
@@ -15,18 +17,24 @@ class ProductOwnerController extends Controller
     {
         $this->middleware('auth:api');
         $this->middleware('can:manage-products');
+        
     }
 
-    public function products(){
-        $products = Product::all();
-        return ProductResource::collection($products);
+    public function publishedProducts(){
+        $my_products = Product::whereHas(
+            'user', function($q){
+                $q->where('user_id', Auth::user()->id);
+            }
+        )->get();
+        return with([
+            'published_products'=>ProductResource::collection($my_products)]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'code_product' => ['required', 'string', 'min:3', 'max:35','unique:products'],
-            'name_product' => ['required', 'string', 'min:3', 'max:35'],
+            'code_product' => ['required', 'string', 'min:10', 'max:20','unique:products'],
+            'name_product' => ['required', 'string', 'min:10', 'max:200'],
             'price' => ['required', 'numeric'],
             'description' => ['required', 'string'],
             'stock' => ['required', 'numeric'],
@@ -40,7 +48,7 @@ class ProductOwnerController extends Controller
             'price' => $request['price'],
             'description' => $request['description'],
             'stock' => $request['stock'],
-            'path_image' =>'https://picsum.photos/id/7/200/300',
+            'path_image' =>$request['path_image'],
             'user_id'=>1
         ]);        
         $owner->products()->save($product);
@@ -48,32 +56,39 @@ class ProductOwnerController extends Controller
             ['msg' => 'product_created']);   
     }
     
-    public function edit(Request $request, $id){
-        //input
-        $request->validate([
-            'code_product' => ['required', 'string', 'min:3', 'max:35','unique:products'],
-            'name_product' => ['required', 'string', 'min:3', 'max:35'],
-            'price' => ['required', 'numeric'],
-            'description' => ['required', 'string'],
-            'stock' => ['required', 'numeric'],
-            'path_image' => ['required', 'string'],
-        ]);   
-        
-        Product::where('id',$id)->update(
-        [
-            'code_product' => $request['code_product'],
-            'name_product' => $request['name_product'],
-            'price' => $request['price'],
-            'description' => $request['description'],
-            'stock' => $request['stock'],
-            'path_image' => $request['path_image'],
-        ]);
-        return with(['message' => 'product_updated']);   
+    public function edit(Request $request, Product $id){
+        if(Auth::user()->id == $id->user_id){
+            //input
+            $request->validate([
+                'code_product' => ['required', 'string', 'min:3', 'max:35','unique:products'],
+                'name_product' => ['required', 'string', 'min:3', 'max:35'],
+                'price' => ['required', 'numeric'],
+                'description' => ['required', 'string'],
+                'stock' => ['required', 'numeric'],
+                'path_image' => ['required', 'string'],
+            ]);  
+
+            $id->update(
+            [
+                'code_product' => $request['code_product'],
+                'name_product' => $request['name_product'],
+                'price' => $request['price'],
+                'description' => $request['description'],
+                'stock' => $request['stock'],
+                'path_image' => $request['path_image'],
+            ]);
+            return Response::allow('Product updated');
+        } else{
+            return Response::deny('You do not own this product.');
+        }       
     }
 
-    public function destroyProduct($id){
-        Product::destroy($id);
-        return with(
-            ['msg' => 'product_removed']); 
+    public function destroyProduct(Product $id){
+        if(Auth::user()->id == $id->user_id){
+            Product::destroy($id->id);
+            return with(['message' => 'product_removed']);
+        } else{
+            return Response::deny('You do not own this product');
+        }         
     }     
 }

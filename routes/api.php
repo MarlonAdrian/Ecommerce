@@ -45,20 +45,22 @@ Route::get('/showaProduct/{id}', [AdminController::class, 'showaProduct']);
 Route::get('/showFeedback/{id}', [AdminController::class, 'showFeedback']);
 
 /*-------------------PRODUCT OWNER-------------------*/
-Route::get('/products', [ProductOwnerController::class, 'products']);
+Route::get('/publishedProducts', [ProductOwnerController::class, 'publishedProducts']);
 Route::post('/publishProduct', [ProductOwnerController::class, 'store']);
-Route::get('/showProduct/{id}', [ProductOwnerController::class, 'showProduct']);
 Route::delete('/destroyProduct/{id}', [ProductOwnerController::class, 'destroyProduct']);
 Route::put('/editProduct/{id}', [ProductOwnerController::class, 'edit']);
 
 /*-----------------------CLIENT-----------------------*/
 Route::post('/postFeedback', [ClientController::class, 'postfeedback']);
-Route::put('/editFeedback/{id}', [ClientController::class, 'editfeedback']); //el primer id estaba $feedback
+Route::put('/editFeedback/{id}', [ClientController::class, 'editfeedback']);
 Route::delete('/destroyFeedback/{id}', [ClientController::class, 'destroyfeedback']);
+Route::get('/showmyfeedbacks', [ClientController::class, 'showmyfeedbacks']);
 Route::post('/orderProduct', [ClientController::class, 'orderProduct']);
 Route::put('/editOrderProduct/{id}', [ClientController::class, 'editOrderProduct']);
 Route::get('/showfeedbacks', [ClientController::class, 'showfeedbacks']);
 Route::get('/showMyProduct/{id}', [ClientController::class, 'showMyProduct']);
+Route::get('/myallorders', [ClientController::class, 'myallorders']);
+
 
 Route::middleware('auth:sanctum','verified')->get('/user', function (Request $request) {
     // return $request->user();

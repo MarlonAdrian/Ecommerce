@@ -3,16 +3,20 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Product;
 
 class ClientProductResource extends JsonResource
 {
     public function toArray($request)
     {
-        $users = Product::all();
-        return [                      
-            'name_product' => $this->name_product,
-            'amount' =>$this->amount,
+        return [    
+            'product_id'=> $this->id,              
+            'product' => $this->product->name_product,
+            'description' => $this->product->description,
+            'amount' => $this->amount,
+
+            // 'product_id'=> $this->id,                  
+            // 'name_product' => $this->name_product,
+            // 'amount' =>$this->amount,
         ]; 
     }
 }

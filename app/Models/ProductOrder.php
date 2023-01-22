@@ -9,23 +9,23 @@ class ProductOrder extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 
-        'owner_personal_phone',
+        'id',
+        'user_id',
         'received',
         'product_id',
-        'user_address',
         'amount',
-        'name_product',
     ];  
     
     //Relación de uno a muchos
     public function user()
     {
         return $this->belongsTo(User::class);
-    }      
-    
+    }         
+
+    // Relación de uno a muchos
+    // Un pedido le pertenece un producto    
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }    
 }

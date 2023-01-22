@@ -16,7 +16,7 @@ return new class extends Migration
             //Product's Code
             $table->string('code_product')->unique();
             //Product's name
-            $table->string('name_product',200)->unique();
+            $table->string('name_product',200);
             //Product's Price
             $table->decimal('price', 8, 2);
             //Product's Description
