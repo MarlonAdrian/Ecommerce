@@ -38,6 +38,11 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }  
 
+    // public function productorder()
+    // {
+    //     return $this->belongsTo(ProductOrder::class);
+    // }    
+
     // Relación de uno a muchos
     // Un producto tiene varias ordenes
     public function productorder()

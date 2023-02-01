@@ -20,6 +20,8 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
+use Carbon\Carbon;
+
 class RegisteredUserController extends Controller
 {
 
@@ -57,11 +59,15 @@ class RegisteredUserController extends Controller
             'personal_phone' => ['required', 'string', 'max:10','unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'address' => ['required', 'string', 'max:200'],
-            'birthdate' => ['required', 'string', 'max:10'],
+            'birthdate' => ['required', 'string', 'date_format:d/m/Y',
+                'after_or_equal:' . date('1950-01-01'),
+                'before_or_equal:' . date('2022-12-31')],
+            'role_id' => [ 'nullable','numeric', 'min:2', 'max:3']
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(),400);
         }
+
 
         $user = User::create([
             'first_name' => $request->first_name,
@@ -70,8 +76,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'personal_phone' => $request->personal_phone,
             'address' => $request->address,
-            'birthdate' => $request->birthdate,
-            'role_id' =>3
+            'birthdate' => $this->changeDateFormat($request->birthdate),
+            'role_id' =>$request->role_id
         ]);
 
         $token = JWTAuth::fromUser($user);
@@ -95,6 +101,13 @@ class RegisteredUserController extends Controller
         }
         return response()->json(compact('user') , 200);
     }
+
+
+    public function changeDateFormat(string $date, string $date_format = 'd/m/Y', string $expected_format = 'Y-m-d')
+    {
+        return Carbon::createFromFormat($date_format, $date)->format($expected_format);
+    }
+
 
     public function logout(Request $request)
     {

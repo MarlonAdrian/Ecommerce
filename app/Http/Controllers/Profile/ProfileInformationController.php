@@ -21,58 +21,40 @@ class ProfileInformationController extends Controller
     //         'user' => Auth::user(),
     //     ]);
     // }
-
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+        
+    }    
+    
     public function update(Request $request)
     {
-
         $request->validate([
-            'first_name' => ['required', 'string', 'alpha','min:3', 'max:35'],
-            'second_name' => ['required', 'string', 'min:3', 'max:35'],
-            'birthdate' => ['nullable', 'string', 'date_format:d/m/Y',
-                'after_or_equal:' . date('Y-m-d', strtotime('-70 years')),
-                'before_or_equal:' . date('Y-m-d', strtotime('-18 years'))],
-            'personal_phone' => ['required', 'numeric', 'digits:10'],
-            'address' => ['required', 'string', 'min:5', 'max:50'],
+            'personal_phone' => [ 'numeric', 'digits:10','unique:'.User::class],
+            'address' => [ 'nullable','string', 'min:5', 'max:300'],
+            'email' => [ 'nullable','string', 'email', 'max:255','unique:'.User::class]
         ]);
 
-
         $user = $request->user();
-
-
-
-
-        /*Update the model using Eloquent*/
-        $user->first_name = $request['first_name'];
-        $user->second_name = $request['last_name'];
-        $user->birthdate = $this->verifyDateFormat($request['birthdate']);
-        $user->personal_phone = $request['personal_phone'];
         $user->address = $request['address'];
-        $user->save();
 
-        //por lo que es backend y no tendría parte visual para ver el avatar
-        // $this->updateUIAvatar($user);
+        if($request->personal_phone!=null && $request->email!=null ){
+            $user->personal_phone = $request['personal_phone'];
+            $user->email = $request['email'];
+        }
+        else if($request->email!=null ){
+            $user->personal_phone = Auth::user()->personal_phone;
+            $user->email = $request['email'];
+        }
+        else if($request->personal_phone!=null ){
+            $user->email = Auth::user()->email;
+            $user->personal_phone = $request['personal_phone'];
+        }
 
-        return back()->with('status', 'Profile update successfully');
+        $user->save(); 
+        return with(
+            ['msg' => 'Profile_information_updated']);            
     }
-
-   //por lo que es backend y no tendría parte visual para ver el avatar
-    // private function updateUIAvatar(User $user): void
-    // {
-    //     $user_image = $user->image;
-    //     $image_path = $user_image->path;
-    //     if (Str::startsWith($image_path, 'https://')) {
-    //         $user_image->path = Str::replaceArray(
-    //             '*',
-    //             [
-    //                 $user->first_name,
-    //                 $user->second_name
-    //             ],
-    //             $this->ui_avatar_api
-    //         );
-    //         $user_image->save();
-    //     }
-    // }
-
 
     private function verifyDateFormat(?string $date): ?string
     {

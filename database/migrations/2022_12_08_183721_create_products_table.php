@@ -23,9 +23,6 @@ return new class extends Migration
             $table->string('description')->nullable();
             //Product's Stock
             $table->string('stock');
-            //Product's State
-            $table->boolean('state')->default(true);
-
 
            //Un producto puede estar varios usuarios y 
            //Un usuario puede tener muchos productos

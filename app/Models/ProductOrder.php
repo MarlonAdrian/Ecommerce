@@ -20,7 +20,12 @@ class ProductOrder extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }         
+    }      
+    
+    // public function product()
+    // {
+    //     return $this->hasOne(Product::class);
+    // }    
 
     // Relación de uno a muchos
     // Un pedido le pertenece un producto    

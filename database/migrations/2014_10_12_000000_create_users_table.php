@@ -14,10 +14,7 @@ return new class extends Migration
             $table->string('first_name',50);
             $table->string('second_name',50);
             $table->string('personal_phone',50);
-            $table->string('address',50);
-            $table->boolean('state')->default(true);
-
-
+            $table->string('address',300);
             $table->string('email')->unique();
             $table->date('birthdate')->nullable();
             $table->timestamp('email_verified_at')->nullable();

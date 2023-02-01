@@ -180,9 +180,6 @@ class ClientController extends Controller
 
         return with([
             'my_feedbacks'=>FeedbackResource::collection($my_feedbacks)]);
-
-        // $feedbacks = Feedback::all();
-        // return FeedbackResource::collection($feedbacks);
     }
 
     public function postfeedback(Request $request){

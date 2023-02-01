@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\JwtMiddleware;
 
 
+
+use App\Http\Controllers\Profile\PasswordController;
+use App\Http\Controllers\Profile\ProfileInformationController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,6 +32,10 @@ Route::post('/register', [RegisteredUserController::class, 'register']);
 Route::get('/showproducts', [ClientController::class, 'showproducts']);
 Route::get('/feedbacks', [FeedbackController::class, 'feedbacks']);
 
+/*---UPDATE PERSONAL INFORMATION----*/
+Route::put('/updatePassword', [PasswordController::class, 'update']);
+Route::put('/updateProfileInfo', [ProfileInformationController::class, 'update']);
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store']);
 
 /*-----------------------ADMIN-----------------------*/
 /*Users*/
