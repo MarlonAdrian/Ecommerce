@@ -12,8 +12,7 @@ class CommerceResource extends JsonResource
         return [
             'id' => $this->id,
             'name_commerce' => $this->name_commerce,
-            'name_owner' => $this->user->getFullName(), 
-            'state'=> $this->state,
+            'name_owner' => $this->user->getFullName(),
             'contact'=> $this->user->personal_phone,
         ]; 
     }
