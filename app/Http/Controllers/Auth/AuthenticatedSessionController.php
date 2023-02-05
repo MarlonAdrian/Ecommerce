@@ -32,7 +32,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
+        return with(['message' => 'Welcome to Ecommerce-mamOlbin! Please, go to Postman to continue with your activity 💪']);     
     }
 
     /**

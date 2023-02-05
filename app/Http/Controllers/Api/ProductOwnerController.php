@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Commerce;
 use App\Models\User;
 use App\Http\Resources\ProductResource;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,52 @@ class ProductOwnerController extends Controller
     {
         $this->middleware('auth:api');
         $this->middleware('can:manage-products');
-        
+        $this->middleware('can:manage-commerces');
     }
 
+/*-----MYCOMMERCE----*/
+    public function myCommerceName(Request $request){
+        $owner = Auth::user();
+        $request->validate([
+            'name_commerce' => ['required', 'string', 'min:10', 'max:300','unique:commerces'],
+            'user_id'=>['unique:commerces']
+        ]);            
+
+        $commerce = Commerce::create([
+            'name_commerce' => $request['name_commerce'],
+            'user_id'=>Auth::user()->select('id')->pluck('id')->first()
+        ]);        
+        $owner->commerces()->save($commerce);
+        return with(
+            ['msg' => 'commerce_created',
+              'your_id_commerce'=>$commerce->id]);   
+    }
+
+    public function editCommerceName(Request $request, Commerce $id){
+        if(Auth::user()->id == $id->user_id){
+            $request->validate([
+                'name_commerce' => ['required', 'string', 'min:10', 'max:300','unique:commerces'],
+            ]); 
+            $id->update(['name_commerce' => $request['name_commerce']]);
+                return Response::allow('Name Commerce updated');
+        }else {
+            return Response::deny('You do not own this commerce.');
+        }
+
+    }
+
+    public function MyIdCommerce(){
+        $mycommerce = Commerce::whereHas(
+            'user', function($q){
+                $q->where('user_id', Auth::user()->id);
+            }
+        )->first();
+        return with([
+            'MyCommerceID'=>$mycommerce->id,
+            'MyCommerceName'=>$mycommerce->name_commerce,
+            ]);
+    }
+/*---MY PRODUCTS---*/    
     public function publishedProducts(){
         $my_products = Product::whereHas(
             'user', function($q){
@@ -82,7 +126,6 @@ class ProductOwnerController extends Controller
             return Response::deny('You do not own this product.');
         }       
     }
-
     public function destroyProduct(Product $id){
         if(Auth::user()->id == $id->user_id){
             Product::destroy($id->id);

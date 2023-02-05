@@ -11,20 +11,9 @@ use Illuminate\Support\Str;
 
 class ProfileInformationController extends Controller
 {
-    //por lo que cómo prueba que esto funciona en backend? en fronts eria optimo
-    // private string $ui_avatar_api = "https://ui-avatars.com/api/?name=*+*&size=128";
-
-    //por lo que es backend y no tendría parte visual para ver el el view de edit
-    // public function edit()
-    // {
-    //     return view('profile.show', [
-    //         'user' => Auth::user(),
-    //     ]);
-    // }
     public function __construct()
     {
         $this->middleware('auth:api');
-        
     }    
     
     public function update(Request $request)

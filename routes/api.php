@@ -57,7 +57,9 @@ Route::get('/publishedProducts', [ProductOwnerController::class, 'publishedProdu
 Route::post('/publishProduct', [ProductOwnerController::class, 'store']);
 Route::delete('/destroyProduct/{id}', [ProductOwnerController::class, 'destroyProduct']);
 Route::put('/editProduct/{id}', [ProductOwnerController::class, 'edit']);
-
+Route::post('/myCommerceName', [ProductOwnerController::class, 'myCommerceName']);
+Route::put('/editCommerceName/{id}', [ProductOwnerController::class, 'editCommerceName']);
+Route::get('/MyIdCommerce', [ProductOwnerController::class, 'MyIdCommerce']);
 /*-----------------------CLIENT-----------------------*/
 Route::post('/postFeedback', [ClientController::class, 'postfeedback']);
 Route::put('/editFeedback/{id}', [ClientController::class, 'editfeedback']);
