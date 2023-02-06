@@ -1,66 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Backend: Ecommerce para la venta de Equipos computacionales - mamOlbin
+Antes de interactuar con la aplicación ya sea en el sitio web, hacer uso del código para alguna mejora, etcétera, usted deberá tener en cuenta algunas consideraciones. Cualquiera que fuese el caso, se exige que se tenga instalado previamente un editor de código fuente, de preferencia Visual Studio Code, en donde usted pueda actualizar y/o modificar el código. Asimismo, de algunas otras herramientas que servirán para un mejor funcionamiento y desarrollo.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Se sugiere que obligatoriamente deba tener todas las herramientas si se hará uso de la misma.**
 
-## About Laravel
+**1. Descarga de proyecto de GitHub**
+   - Es importante realizar la descarga del proyecto para tener acceso a los recursos ya elaborados
+   - **Nota: La rama a descargarse deberá ser el del Sprint6, debido a que esa rama es la que posee todo el código fuente del proyecto que ha sido desarrollado.**
+   - En el siguiente enlace se encuentra infromación de cómo realizar la descarga de un proyecto de GitHub según su rama: 
+        *https://www.cristianmonroy.com/2021/04/aprende-a-descargar-archivos-individuales-de-github.html*
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**2. Descarga de proyecto de Visual Studio**
+   - Sea cual fuese su sistema operativo se puede descargar el editor de código mediante el siguiente enlace: 
+        *https://code.visualstudio.com/download*
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**3. Descarga de Git**
+   - De la misma forma se debe descargar la herramienta de Git depedendiendo del sistema operativo del ordenador para que trabaje conjuntamente con GitHub: 
+        *https://git-scm.com/book/es/v2/Inicio---Sobre-el-Control-de-Versiones-Instalaci%C3%B3n-de-Git*
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**4. Descarga de Node.js**
+   - Al igual que los pasos anteriores se recomienda la instalacción de otra herramienta que servirá para la instalación de librerias: 
+        *https://nodejs.org/es/*
 
-## Learning Laravel
+**5. Descarga de XAMPP**
+   - La instalación de Xampp: 
+        *https://www.apachefriends.org/es/index.html*
+   
+**6. Descarga de Composer**
+   - Composer es de gran utilidad dado que trabaja en conjunto con laravel: 
+        *https://getcomposer.org/download/*
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**7. Descarga de Laravel**
+   - Puede descargar Laravel en su ordenador con el siguiente comando, debido al paso anterior de la descarga de Composer, agilizando la descarga
+     - *composer global require laravel/installer*
+   - Sino con la documentación oficial de Laravel: *https://laravel.com/docs/7.x#installing-laravel*
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+**8. Creación y Modificación archivo *.env***
+   - Por seguridad GitHub evita el alojamiento y descarga del archivo *.env*, debido a información sensible que se almacena allí.
+   - Es necesario la creación de un archivo *.env* en la carpeta raíz del proyecto.
+   - En el archivo *.env.example* se encuentra un modelo de los campos que deberán completarse para trabajar con el proyecto localmente. Por ejemplo, campos que deberán editarse para una base de datos a elección:
+     - DB_CONNECTION
+     - DB_HOST
+     - DB_PORT
+     - DB_DATABASE
+     - DB_USERNAME
+     - DB_PASSWORD
+   - De la misma forma, campos para el envío de correo electrónico:
+     - MAIL_DRIVER
+     - MAIL_HOST
+     - MAIL_PORT
+     - MAIL_USERNAME
+     - MAIL_PASSWORD
+     - MAIL_ENCRYPTION   
+   - **NOTA: SI NO MODIFICA ESTOS CAMPOS NO PODRÁ AVANZAR A LOS SIGUIENTES PASOS**  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**9. Obtener archivo vendor del proyecto original con Composer*
+   - Ingrese el comando: 
+     - *composer install*
 
-## Laravel Sponsors
+**10. Obtener dependencias y librerias del proyecto original**
+   - Ingrese el comando: 
+     - *npm install*
+     
+**11. Migración de datos a la base de datos ingresada en el paso 8**
+   - Ingrese el comando: 
+     - *php artisan migrate*
+     - *php artisan migrate:refresh --seed*
+     
+**12. Creación token para JWT hacia el archivo *.env***
+   - Ingrese el comando: 
+     - *php artisan jwt:secret*     
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+**13. Ejecucicón VITE en el proyecto para visualización**
+   - Ingrese el comando: 
+     - *npm run dev*     
+     
+**14. Migración de datos a la base de datos ingresada en el paso 8**
+   - Ingrese el comando: 
+    - *php artisan serve*
+     - Una vez ingresado el comando anterior deberá abrir su navegador e ingresar el puerto que le indica. Va a ver una imagen como la siguiente, debe dar clic en *Generate App Key*. Esto sucede debido a que se descargó el proyecto de GitHub y el valor de esta App Key se eliminó, por lo que aquí solamente está creando uno nuevo.
+        - ![imagen](https://user-images.githubusercontent.com/66731201/216922100-74f7fce9-3bf2-483f-96fe-c4575684c03c.png)
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ **15. Ya se puede hacer uso del proyecto**  
+ 
+ **16. Utilice la herramienta *Postman* para comenzar a interactuar con el proyecto**       
