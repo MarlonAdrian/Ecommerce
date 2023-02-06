@@ -1,5 +1,5 @@
 # Backend: Ecommerce para la venta de Equipos computacionales - mamOlbin
-Antes de interactuar con la aplicación ya sea en el sitio web, hacer uso del código para alguna mejora, etcétera, usted deberá tener en cuenta algunas consideraciones. Cualquiera que fuese el caso, se exige que se tenga instalado previamente un editor de código fuente, de preferencia Visual Studio Code, en donde usted pueda actualizar y/o modificar el código. Asimismo, de algunas otras herramientas que servirán para un mejor funcionamiento y desarrollo.
+Antes de interactuar con la aplicación ya sea en el sitio web, hacer uso del código para alguna mejora, etcétera, usted deberá tener en cuenta algunas consideraciones. Cualquiera que fuese el caso, se exige que se tenga instalado previamente un editor de código fuente, de preferencia *Visual Studio Code*, en donde usted pueda actualizar y/o modificar el código. Asimismo, de algunas otras herramientas que servirán para un mejor funcionamiento y desarrollo, como lo es *Postman*.
 
 **Se sugiere que obligatoriamente deba tener todas las herramientas si se hará uso de la misma.**
 
