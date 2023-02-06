@@ -1,4 +1,4 @@
-# Desarrollo de un componente Backend para la venta de Equipos Computacionales. PASOS PARA QUE ALGUIEN SE ISNTALE Y LO TRABAJE LOCALMENTE
+# Desarrollo de un componente Backend para la venta de Equipos Computacionales.
 
 **1. Realizar la recopilación de requerimientos del sistema.**
 
