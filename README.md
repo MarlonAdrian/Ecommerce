@@ -53,7 +53,7 @@ Antes de interactuar con la aplicación ya sea en el sitio web, hacer uso del c�
      - MAIL_ENCRYPTION   
    - **NOTA: SI NO MODIFICA ESTOS CAMPOS SERÁ COMPLEJO AVANZAR A LOS SIGUIENTES PASOS**  
 
-**9. Obtener archivo vendor del proyecto original con Composer*
+**9. Obtener archivo vendor del proyecto original con Composer**
    - Ingrese el comando: 
      - *composer install*
 
@@ -80,6 +80,6 @@ Antes de interactuar con la aplicación ya sea en el sitio web, hacer uso del c�
      - Una vez ingresado el comando anterior deberá abrir su navegador e ingresar el puerto que le indica. Va a ver una imagen como la siguiente, debe dar clic en *Generate App Key*. Esto sucede debido a que se descargó el proyecto de GitHub y el valor de esta App Key se eliminó, por lo que aquí solamente está creando uno nuevo.
         - ![imagen](https://user-images.githubusercontent.com/66731201/216922100-74f7fce9-3bf2-483f-96fe-c4575684c03c.png)
 
- **15. Ya se puede hacer uso del proyecto**  
+ **15. Ya se puede hacer uso del código del proyecto**  
  
  **16. Utilice la herramienta *Postman* para comenzar a interactuar con el proyecto**       
