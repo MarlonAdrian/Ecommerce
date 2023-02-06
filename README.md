@@ -51,7 +51,7 @@ Antes de interactuar con la aplicación ya sea en el sitio web, hacer uso del c�
      - MAIL_USERNAME
      - MAIL_PASSWORD
      - MAIL_ENCRYPTION   
-   - **NOTA: SI NO MODIFICA ESTOS CAMPOS NO PODRÁ AVANZAR A LOS SIGUIENTES PASOS**  
+   - **NOTA: SI NO MODIFICA ESTOS CAMPOS SERÁ COMPLEJO AVANZAR A LOS SIGUIENTES PASOS**  
 
 **9. Obtener archivo vendor del proyecto original con Composer*
    - Ingrese el comando: 
